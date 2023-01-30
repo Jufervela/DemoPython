@@ -17,7 +17,7 @@ pipeline
             stage('Build') {
                 steps {
                     git branch: 'main', url: 'https://github.com/Jufervela/DemoPython.git'
-                    bat label: '' , script: 'python hola_mundo.py'
+                    sh 'python hola_mundo.py'
                 }
             }
         }
