@@ -14,10 +14,22 @@ pipeline
                 }
             }
 
-            stage('Build') {
+            stage('BUILD') {
                 steps {
                     git branch: 'main', url: 'https://github.com/Jufervela/DemoPython.git'
-                    sh 'python hola_mundo.py'
+                    eho 'python hola_mundo.py'
+                }
+            }
+            stage('TEST') {
+                steps {
+                    git branch: 'main', url: 'https://github.com/Jufervela/DemoPython.git'
+                    eho 'python hola_mundo.py'
+                }
+            }
+            stage('DEPLOY') {
+                steps {
+                    git branch: 'main', url: 'https://github.com/Jufervela/DemoPython.git'
+                    eho 'python hola_mundo.py'
                 }
             }
         }
