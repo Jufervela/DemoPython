@@ -7,5 +7,11 @@ pipeline
                 git branch: 'main', url: 'https://github.com/Jufervela/DemoPython.git'
             }
         }
+
+        stage('Unit testing') {
+            steps {
+                sh 'mvn test'
+            }
+        }
     }
 }
