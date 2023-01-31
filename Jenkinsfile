@@ -8,28 +8,26 @@ pipeline
                 }
             }
 
-            stage('UNIT testing') {
+            stage('Checkout') {
                 steps {
                     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Jufervela/DemoPython.git']])
                 }
             }
-
-            stage('BUILD') {
-                steps {
-                    git branch: 'main', url: 'https://github.com/Jufervela/DemoPython.git'
-                    eho 'python hola_mundo.py'
-                }
-            }
             stage('TEST') {
                 steps {
-                    git branch: 'main', url: 'https://github.com/Jufervela/DemoPython.git'
-                    eho 'python hola_mundo.py'
+                    sh 'mvn test'
                 }
             }
-            stage('DEPLOY') {
+            stage('BUILD') {
                 steps {
-                    git branch: 'main', url: 'https://github.com/Jufervela/DemoPython.git'
-                    eho 'python hola_mundo.py'
+                    sh 'mvn clean install'
+                }
+            }
+            stage('ANALISIS DE CODIGO ESTATICO') {
+                steps {
+                    withSonarQubeEnv(credentialsId: 'sonar-api') {
+                    sh 'mvn clean packagesonar:sonar'
+                    }
                 }
             }
         }
